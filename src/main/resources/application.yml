@@ -1,0 +1,14 @@
+spring:
+  application:
+    name: portfolio_urless_backend
+  datasource:
+    driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    password: sa
+    url: jdbc:sqlserver://;serverName=localhost;databaseName=urless;encrypt=true;trustServerCertificate=true;
+    username: sa
+
+logging:
+  level:
+    root: INFO
+    org.springframework.web: INFO
+    com.steevenengracia: INFO
