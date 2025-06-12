@@ -39,8 +39,10 @@ public class Url {
     }
 
   public HashMap<String, String> validate() {
-    HashMap<String, String> errors = new HashMap<>();
+    HashMap<String, String> errors = new HashMap<String, String>();
 
+    raw_url.isEmpty();
+    customer_id.isEmpty();
     if (!raw_url.isSuccess()) {
       errors.put("raw_url", raw_url.error());
     }
@@ -54,7 +56,7 @@ public class Url {
     }
 
     if (!short_url.isSuccess()) {
-      errors.put("id", customer_id.error());
+      errors.put("short_url", short_url.error());
     }
 
     return errors;
@@ -92,8 +94,6 @@ public class Url {
       this.customer_id = customer_id;
       return this;
     }
-
-
 
     public Url build(){
       return new Url(this);
