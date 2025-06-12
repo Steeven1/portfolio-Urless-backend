@@ -2,10 +2,14 @@ spring:
   application:
     name: portfolio_urless_backend
   datasource:
+    #driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
+    #password: Sa.Password
+    #url: jdbc:sqlserver://127.0.0.1:1433;databaseName=urless;encrypt=true;trustServerCertificate=true;
+    #username: sa
     driver: com.microsoft.sqlserver.jdbc.SQLServerDriver
-    password: sa
-    url: jdbc:sqlserver://;serverName=localhost;databaseName=urless;encrypt=true;trustServerCertificate=true;
-    username: sa
+    url: ${SPRING_DATASOURCE_URL}
+    password: ${SPRING_DATASOURCE_USERNAME}
+    username: ${SPRING_DATASOURCE_USERNAME}
 
 logging:
   level:

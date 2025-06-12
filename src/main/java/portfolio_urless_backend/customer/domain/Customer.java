@@ -3,11 +3,11 @@ package portfolio_urless_backend.customer.domain;
 
 public class Customer {
 
-    private  final CustomerId          id;
-    private  final CustomerEmail       email;
-    private  final CustomerPassword    password;
-    private  final CustomerFirstname   firstname;
-    private  final CustomerLastname    lastname;
+    private final CustomerId        id;
+    private final CustomerEmail     email;
+    private final CustomerPassword  password;
+    private final CustomerFirstname firstname;
+    private final CustomerLastname  lastname;
 
     public Customer(
             String id,
