@@ -16,11 +16,11 @@ public class Customer {
             String firstname,
             String lastname
     ){
-        this.id        = new CustomerId(id=id);
-        this.email     = new CustomerEmail(email=email);
-        this.password  = new CustomerPassword(password=password);
-        this.firstname = new CustomerFirstname(firstname=firstname);
-        this.lastname  = new CustomerLastname(lastname=lastname);
+        this.id        = new CustomerId(id);
+        this.email     = new CustomerEmail(email);
+        this.password  = new CustomerPassword(password);
+        this.firstname = new CustomerFirstname(firstname);
+        this.lastname  = new CustomerLastname(lastname);
     }
 
     public String getId() {
@@ -38,6 +38,5 @@ public class Customer {
     public String getEmail(){
         return this.email.value;
     }
-
 
 }
