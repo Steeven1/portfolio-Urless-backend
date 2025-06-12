@@ -2,8 +2,6 @@ package portfolio_urless_backend.url.infra;
 
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
-import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import portfolio_urless_backend.url.domain.entities.Url;
@@ -55,9 +53,6 @@ public class SqlServerUrlRepository implements UrlRepository<Url> {
 
     @Override
     public List<Url> findBy(Url url) {
-
-      SqlParameterSource namedParameters = new MapSqlParameterSource()
-        .addValue("short_url", url.getShortUrl().value());
 
       String query = """
       select * from urls
