@@ -6,7 +6,7 @@ public class UrlShort {
     private boolean isSuccess;
 
   public UrlShort(String value){
-        this.value = value;
+        this.value = String.valueOf(value);
         this.error = "";
         this.isSuccess = true;
         //this.isEmpty(value);

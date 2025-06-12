@@ -1,7 +1,7 @@
 package portfolio_urless_backend.url.domain.valueobjs;
 
 public class CustomerId {
-    private String value;
+    private final String value;
     private String error;
     private boolean isSuccess;
 

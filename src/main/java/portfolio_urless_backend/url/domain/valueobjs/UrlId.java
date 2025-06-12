@@ -1,7 +1,7 @@
 package portfolio_urless_backend.url.domain.valueobjs;
 
 public class UrlId {
-    private Long value;
+    private final Long value;
     private boolean isSuccess;
     private String error;
     public UrlId(Long value){
