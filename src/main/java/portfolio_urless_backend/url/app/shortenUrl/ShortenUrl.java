@@ -6,7 +6,6 @@ import portfolio_urless_backend.url.domain.entities.Url;
 import portfolio_urless_backend.url.domain.UrlRepository;
 
 import java.util.HashMap;
-import java.util.Optional;
 
 public class ShortenUrl {
 
@@ -28,36 +27,29 @@ public class ShortenUrl {
 
       //verify that raw_url not in error
       Url urlToValid = urlToBuild.build();
-      urlToValid.getRawUrl().isEmpty();
-      urlToValid.getId().isEmpty();
-      HashMap<String, String> withError = urlToValid.validate();
-
-      if( !withError.isEmpty() ){
-        return new UrlDto.Builder()
-          .errors( withError )
-          .build();
-      }
-
+      HashMap<String, String> problemDetails = urlToValid.validate();
+      
       //Generate short_url
-      if( url.getShort_url() == null){
-        String short_url = this.shortenUrlStrategy.run(2);
-        urlToBuild.short_url( "http://127.0.0.1/urls/" + short_url );
+       String short_url = url.getShort_url();
+       if( short_url == null){
+            short_url = this.shortenUrlStrategy.run(2);
       }
 
-     Url urlToSave = urlToBuild
-        .short_url( "http://127.0.0.1/urls/" + url.getShort_url() )
-        .build();
+      urlToBuild
+        .short_url( "http://127.0.0.1/urls/" + short_url );
 
       //persist url in database
       this.repo.create(
-        urlToSave
+              urlToBuild.build()
       );
 
       //return UrlDto with only short_url
       return new UrlDto.Builder()
         .short_url(
-          urlToSave.getShortUrl().value()
-        ).build();
+                urlToBuild.build().getShortUrl().value()
+        )
+        .errors( problemDetails )
+        .build();
 
 
 
