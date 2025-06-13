@@ -9,4 +9,5 @@ public interface UrlRepository<Entity> {
     public void create(Entity url);
     public List<Entity> findBy(Entity url);
     public void delete(Entity url);
+    public Long getIntex();
 }
