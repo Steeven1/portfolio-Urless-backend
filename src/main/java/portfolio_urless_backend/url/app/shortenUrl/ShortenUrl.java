@@ -32,7 +32,7 @@ public class ShortenUrl {
       //Generate short_url
        String short_url = url.getShort_url();
        if( short_url == null){
-          short_url = this.shortenUrlStrategy.run(repo.getIntex());
+            short_url = this.shortenUrlStrategy.run(2);
       }
 
       urlToBuild

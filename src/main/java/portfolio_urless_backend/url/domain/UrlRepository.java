@@ -1,7 +1,5 @@
 package portfolio_urless_backend.url.domain;
 
-import portfolio_urless_backend.url.domain.entities.Url;
-
 import java.util.List;
 
 public interface UrlRepository<Entity> {

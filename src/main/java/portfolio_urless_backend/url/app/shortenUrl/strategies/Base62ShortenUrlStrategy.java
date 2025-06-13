@@ -9,10 +9,10 @@ public class Base62ShortenUrlStrategy implements ShortenUrlStrategy{
     }
 
     @Override
-    public String run(Long n) {
+    public String run(int n) {
         StringBuilder sb = new StringBuilder();
         while (n != 0) {
-            sb.insert(0, elements.charAt( (int) (n % 62) ) );
+            sb.insert(0, elements.charAt( (n % 62) ) );
             n /= 62;
         }
         while (sb.length() != 7) {
