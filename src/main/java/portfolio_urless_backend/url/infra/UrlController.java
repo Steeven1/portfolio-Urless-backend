@@ -9,7 +9,6 @@ import portfolio_urless_backend.url.app.findByUrl.FindByUrl;
 import portfolio_urless_backend.url.app.shortenUrl.ShortenUrl;
 import portfolio_urless_backend.url.domain.entities.Url;
 
-import java.util.HashMap;
 import java.util.List;
 
 @RestController
