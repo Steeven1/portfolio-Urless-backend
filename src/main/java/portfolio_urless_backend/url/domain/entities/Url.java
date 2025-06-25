@@ -7,6 +7,8 @@ import portfolio_urless_backend.url.domain.valueobjs.UrlShort;
 
 import java.util.HashMap;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class Url {
     private final UrlId id;
     private final UrlRaw raw_url;
@@ -25,17 +27,42 @@ public class Url {
         this.customer_id = new CustomerId(customer_id);
     }
 
+    @JsonIgnore
     public UrlId getId() {
         return this.id;
     }
+
+   
+    public Long getIdValue() {
+        return this.id.value();
+    }
+
+   @JsonIgnore
     public UrlRaw getRawUrl(){
         return this.raw_url;
     }
+
+  
+    public String getRawUrlValue() {
+        return this.raw_url.value();
+    }
+
+    @JsonIgnore
     public UrlShort getShortUrl(){
         return this.short_url;
     }
+
+    public String getShortUrlValue() {
+        return this.short_url.value();
+    }
+
+    @JsonIgnore
     public CustomerId getCustomerId(){
         return this.customer_id;
+    }
+
+    public String getCustomerIdValue() {
+        return this.customer_id.value();
     }
 
   public HashMap<String, String> validate() {
