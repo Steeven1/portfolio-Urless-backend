@@ -1,6 +1,5 @@
 package portfolio_urless_backend.url.infra;
 
-import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
@@ -24,9 +23,18 @@ public class SqlServerUrlRepository implements UrlRepository<Url> {
 
   ) {
     String selectAllQuery = "select * from urls";
+    // return this.jdbcTemplate.query(
+    //     selectAllQuery,
+    //     new BeanPropertyRowMapper<>(Url.class));
+
     return this.jdbcTemplate.query(
         selectAllQuery,
-        new BeanPropertyRowMapper<>(Url.class));
+        (rs, rowNum) -> new Url.Builder()
+            .id(rs.getLong("id"))
+            .raw_url(rs.getString("raw_url"))
+            .short_url(rs.getString("short_url"))
+            .customer_id(rs.getString("customer_id"))
+            .build());
   }
 
   @Override
