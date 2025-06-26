@@ -30,8 +30,12 @@ public class UrlController {
   }
 
   @GetMapping
-  public List<Url> findAll(){
-    return this.findAllUrlUseCase.run();
+  public List<Url> findAll(
+  @RequestParam(required = false, defaultValue = "0") Long cursor,
+  @RequestParam(required = false, defaultValue = "10") Long limit
+  )
+  {
+    return this.findAllUrlUseCase.run(cursor, limit);
   }
 
   @GetMapping("/{short_url}")
