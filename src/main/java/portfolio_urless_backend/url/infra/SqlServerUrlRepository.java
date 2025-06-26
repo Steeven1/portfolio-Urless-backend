@@ -20,16 +20,19 @@ public class SqlServerUrlRepository implements UrlRepository<Url> {
 
   @Override
   public List<Url> findAll(
-      Long cursor
+      Long cursor,
+      Long limit
   ) {
     String selectAllQuery = """
-        SELECT TOP 10 * raw_url, short_url  FROM urls
-        WHERE id > cursor
+        SELECT TOP ? * raw_url, short_url  FROM urls
+        WHERE id < ?
         ORDER BY id DESC
         """;
     // return this.jdbcTemplate.query(
     //     selectAllQuery,
     //     new BeanPropertyRowMapper<>(Url.class));
+
+    
 
     return this.jdbcTemplate.query(
         selectAllQuery,
@@ -37,8 +40,10 @@ public class SqlServerUrlRepository implements UrlRepository<Url> {
             .id(rs.getLong("id"))
             .raw_url(rs.getString("raw_url"))
             .short_url(rs.getString("short_url"))
-            .customer_id(rs.getString("customer_id"))
-            .build());
+            .build(),
+            limit,
+            cursor
+            );
   }
 
   @Override
