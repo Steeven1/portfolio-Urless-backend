@@ -16,9 +16,9 @@ public class FindAllUrl {
         this.repo = repo;
     }
 
-    public List<Url> run() {
+    public List<Url> run(Long cursor, Long limit) {
 
-        return this.repo.findAll();
+        return this.repo.findAll(cursor, limit);
 
     }
 }
