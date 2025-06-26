@@ -31,9 +31,9 @@ public class ShortenUrl {
       
       //Generate short_url
        String short_url = url.getShort_url();
-       if( short_url == null){
+       if( short_url == null ){
           short_url = this.shortenUrlStrategy.run(repo.getIntex());
-      }
+        }
 
       urlToBuild
         .short_url( "http://127.0.0.1/urls/" + short_url );
@@ -46,7 +46,7 @@ public class ShortenUrl {
       //return UrlDto with only short_url
       return new UrlDto.Builder()
         .short_url(
-                urlToBuild.build().getShortUrl().value()
+          urlToBuild.build().getShortUrlValue()
         )
         .errors( problemDetails )
         .build();
