@@ -46,7 +46,7 @@ public class UrlController {
           new Url.Builder()
             .short_url(short_url)
             .build()
-        ).getFirst().getShortUrl().value()
+        ).getFirst().getShortUrlValue()
 
       )
       .build();
