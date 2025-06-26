@@ -20,9 +20,13 @@ public class SqlServerUrlRepository implements UrlRepository<Url> {
 
   @Override
   public List<Url> findAll(
-
+      Long cursor
   ) {
-    String selectAllQuery = "select * from urls";
+    String selectAllQuery = """
+        SELECT TOP 10 * raw_url, short_url  FROM urls
+        WHERE id > cursor
+        ORDER BY id DESC
+        """;
     // return this.jdbcTemplate.query(
     //     selectAllQuery,
     //     new BeanPropertyRowMapper<>(Url.class));
