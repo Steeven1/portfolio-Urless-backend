@@ -73,8 +73,6 @@ SET @lastId = (
 )
 PRINT str(@lastId)
 
---SET @lastId = 1;
-
 SET @hasMore = CASE 
     WHEN EXISTS (SELECT 1 FROM urls WHERE id < @LastId) THEN 1
     ELSE 0 END;
