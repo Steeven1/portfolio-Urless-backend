@@ -63,14 +63,17 @@ DECLARE @lastShortUrl VARCHAR(50) = 'https://fake-api3.com/';
 DECLARE @hasMore BIT;
 DECLARE @lastId BIGINT;
 
-
-SET @lastId = (
+SET @lastId = ISNULL(@lastId, 
+    (
 	SELECT MAX(lastIDs.id) FROM (
-	SELECT TOP (@pageSize) id
-	FROM urls 
-	ORDER BY id ASC
-	) AS lastIDs(id)
+	    SELECT TOP (@pageSize) id
+	    FROM urls 
+	    ORDER BY id ASC
+	        ) AS lastIDs(id)
+    )    
 )
+
+SET @lastId = 
 PRINT str(@lastId)
 
 SET @hasMore = CASE 
