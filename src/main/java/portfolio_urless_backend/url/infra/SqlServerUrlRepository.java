@@ -1,6 +1,7 @@
 package portfolio_urless_backend.url.infra;
 
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.simple.SimpleJdbcCall;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import portfolio_urless_backend.url.domain.entities.Url;
@@ -14,7 +15,9 @@ public class SqlServerUrlRepository implements UrlRepository<Url> {
   private final JdbcTemplate jdbcTemplate;
 
   public SqlServerUrlRepository(
-      JdbcTemplate jdbcTemplate) {
+      JdbcTemplate jdbcTemplate
+      
+      ) {
     this.jdbcTemplate = jdbcTemplate;
   }
 
@@ -23,27 +26,33 @@ public class SqlServerUrlRepository implements UrlRepository<Url> {
       Long cursor,
       Long limit
   ) {
-    String selectAllQuery = """
-        SELECT TOP ? * raw_url, short_url  FROM urls
-        WHERE id < ?
-        ORDER BY id DESC
-        """;
-    // return this.jdbcTemplate.query(
-    //     selectAllQuery,
-    //     new BeanPropertyRowMapper<>(Url.class));
 
-    
-
-    return this.jdbcTemplate.query(
-        selectAllQuery,
-        (rs, rowNum) -> new Url.Builder()
+    SimpleJdbcCall simpleJdbcCall = new SimpleJdbcCall(jdbcTemplate)
+        .withProcedureName("getPaginetedUrls")
+        .declareParameters(
+            new org.springframework.jdbc.core.SqlParameter("cursor", java.sql.Types.BIGINT),
+            new org.springframework.jdbc.core.SqlParameter("limit", java.sql.Types.BIGINT)
+        )
+        .returningResultSet("urls", (rs, rowNum ) -> new Url.Builder()
             .id(rs.getLong("id"))
             .raw_url(rs.getString("raw_url"))
             .short_url(rs.getString("short_url"))
-            .build(),
-            limit,
-            cursor
-            );
+            .customer_id(rs.getString("customer_id"))
+            .build());
+
+        var params = new java.util.HashMap<String, Object>();
+        params.put("cursor", cursor);
+        params.put("limit", limit);
+
+        var result = simpleJdbcCall.execute(params);
+      
+        if( result.get("urls") != null ) {
+          @SuppressWarnings("unchecked")
+          List<Url> urls = (List<Url>) result.get("urls");
+          return urls;
+        }
+        
+        return List.of();
   }
 
   @Override
