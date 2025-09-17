@@ -2,7 +2,7 @@ package portfolio_urless_backend.url.domain;
 
 import java.util.List;
 
-public interface UrlRepository<Entity> {
+public interface UrlRepository<Entity, Dto> {
     public List<Entity> findAll (Long cursor, Long limit);
     public void create(Entity url);
     public List<Entity> findBy(Entity url);

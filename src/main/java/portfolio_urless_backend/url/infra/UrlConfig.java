@@ -6,6 +6,7 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import portfolio_urless_backend.url.app.findAllUrl.FindAllUrl;
 import portfolio_urless_backend.url.app.findByUrl.FindByUrl;
 import portfolio_urless_backend.url.app.shortenUrl.ShortenUrl;
+import portfolio_urless_backend.url.app.UrlPageDto;
 import portfolio_urless_backend.url.app.shortenUrl.strategies.Base62ShortenUrlStrategy;
 import portfolio_urless_backend.url.app.shortenUrl.strategies.ShortenUrlStrategy;
 import portfolio_urless_backend.url.domain.entities.Url;
@@ -25,23 +26,23 @@ public class UrlConfig {
   }
 
   @Bean
-  public UrlRepository<Url> urlRepository() {
+  public UrlRepository<Url, UrlPageDto> urlRepository() {
     return new SqlServerUrlRepository(jdbcTemplate);
   }
 
   @Bean
-  public FindByUrl findByUrl(UrlRepository<Url> urlRepository) {
+  public FindByUrl findByUrl(UrlRepository<Url, UrlPageDto> urlRepository) {
     return new FindByUrl(urlRepository);
   }
 
   @Bean
-  public FindAllUrl findAllUrl(UrlRepository<Url> urlRepository) {
+  public FindAllUrl findAllUrl(UrlRepository<Url, UrlPageDto> urlRepository) {
       return new FindAllUrl(urlRepository);
   }
 
   @Bean
   public ShortenUrl shortenUrl(
-    UrlRepository<Url> urlRepository,
+    UrlRepository<Url, UrlPageDto> urlRepository,
     Base62ShortenUrlStrategy base64ShortenUrlStrategy
   ) 
   {

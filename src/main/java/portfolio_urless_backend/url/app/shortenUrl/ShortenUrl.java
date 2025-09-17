@@ -1,6 +1,7 @@
 package portfolio_urless_backend.url.app.shortenUrl;
 
 import portfolio_urless_backend.url.app.UrlDto;
+import portfolio_urless_backend.url.app.UrlPageDto;
 import portfolio_urless_backend.url.app.shortenUrl.strategies.ShortenUrlStrategy;
 import portfolio_urless_backend.url.domain.entities.Url;
 import portfolio_urless_backend.url.domain.UrlRepository;
@@ -9,10 +10,10 @@ import java.util.HashMap;
 
 public class ShortenUrl {
 
-    private final UrlRepository<Url> repo;
+    private final UrlRepository<Url, UrlPageDto> repo;
     private final ShortenUrlStrategy shortenUrlStrategy;
 
-    public ShortenUrl(UrlRepository<Url> repo,
+    public ShortenUrl(UrlRepository<Url, UrlPageDto> repo,
                       ShortenUrlStrategy shortenUrlStrategy
                       ) {
         this.repo = repo;

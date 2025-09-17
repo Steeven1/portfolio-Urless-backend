@@ -6,11 +6,11 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 import portfolio_urless_backend.url.domain.entities.Url;
 import portfolio_urless_backend.url.domain.UrlRepository;
-
+import portfolio_urless_backend.url.app.UrlPageDto;
 import java.util.List;
 
 @Repository
-public class SqlServerUrlRepository implements UrlRepository<Url> {
+public class SqlServerUrlRepository implements UrlRepository<Url, UrlPageDto> {
 
   private final JdbcTemplate jdbcTemplate;
 
